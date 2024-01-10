@@ -3,6 +3,8 @@ import axios from 'axios'
 import Navbar from './components/Navbar'
 import Container from './components/Container'
 import Input from './components/Input'
+import Empty from './components/Empty'
+import Emojis from './components/Emojis'
 
 const App = () => {
   const [emojisData, setEmojisData] = useState([])
@@ -37,7 +39,11 @@ const App = () => {
       <Navbar />
       <Container>
         <Input onChange={handleSearchEmojis} value={searchText} />
-      </Container>
+
+        { loading && <Empty text="Loading ... " />}
+        { error && <Empty text="Error! " />}
+        {emojisData.length > 0 && <Emojis emojisData={emojisData} searchText={searchText} />}      
+        </Container>
     </>
   )
 }
